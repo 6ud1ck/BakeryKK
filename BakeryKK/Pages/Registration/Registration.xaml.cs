@@ -13,19 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BakeryKK
+namespace BakeryKK.Pages.Registration
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для Registration.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Registration : Page
     {
-        
-        public MainWindow()
+        public Registration()
         {
             InitializeComponent();
         }
-
-      
     }
 }

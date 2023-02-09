@@ -13,19 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BakeryKK
+namespace BakeryKK.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для WelcomPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class WelcomPage : Page
     {
-        
-        public MainWindow()
+        public WelcomPage()
         {
             InitializeComponent();
         }
 
-      
+        private void btnBackToAuth_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
     }
 }
