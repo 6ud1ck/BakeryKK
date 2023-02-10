@@ -23,6 +23,50 @@ namespace BakeryKK.Pages.Registration
         public Registration()
         {
             InitializeComponent();
+            
+        }
+
+        private void btnNextReg_Click(object sender, RoutedEventArgs e)
+        {
+            string FName = txbFName.Text;
+            string LName = txbLName.Text;
+            string Patronymic = txbPatronymic.Text;
+            if (rbMan.IsChecked == true)
+            {
+                string gender = "м";
+            }
+            else
+            {
+                string gender = "ж";
+            }
+            string Date = txbDate.Text;
+            string Phone = txbPhone.Text;
+
+            NavigationService.Navigate(new AccountUser());
+        }
+
+        private void rbMan_Click(object sender, RoutedEventArgs e)
+        {
+            if (rbMan.IsChecked == true)
+            {
+                rbWoman.IsChecked = false;
+            }
+            else if (rbWoman.IsChecked == true)
+            {
+                rbMan.IsChecked = false;
+            }
+        }
+
+        private void rbWoman_Click(object sender, RoutedEventArgs e)
+        {
+            if (rbMan.IsChecked == true)
+            {
+                rbWoman.IsChecked = false;
+            }
+            else if (rbWoman.IsChecked == true)
+            {
+                rbMan.IsChecked = false;
+            }
         }
     }
 }

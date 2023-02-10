@@ -39,5 +39,10 @@ namespace BakeryKK.Pages
                 MessageBox.Show("Данного пользователя нет в базе данных!!!");
             }
         }
+
+        private void btnRegAccount_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Registration.Registration());
+        }
     }
 }

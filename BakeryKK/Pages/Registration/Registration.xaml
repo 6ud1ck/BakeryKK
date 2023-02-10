@@ -21,26 +21,30 @@
                     Margin="30 0 0 0">
             <TextBlock Text="Имя"
                        FontSize="15"/>
-            <TextBox Margin="0 5 0 5"/>
+            <TextBox Margin="0 5 0 5" x:Name="txbFName"/>
             <TextBlock Text="Фамилия"
                        FontSize="15"/>
-            <TextBox Margin="0 5 0 5"/>
+            <TextBox Margin="0 5 0 5" x:Name="txbLName"/>
             <TextBlock Text="Отчество"
                        FontSize="15"/>
-            <TextBox Margin="0 5 0 5"/>
+            <TextBox Margin="0 5 0 5" x:Name="txbPatronymic"/>
             <TextBlock Text="Укажите свой пол"
                        FontSize="15"
                        Margin="0 5 0 5"/>
             <RadioButton Content="Мужской"
-                         Margin="0 5 0 5"/>
+                         Margin="0 5 0 5"
+                         x:Name="rbMan"
+                         Click="rbMan_Click"/>
             <RadioButton Content="Женский"
-                         Margin="0 5 0 5"/>
+                         Margin="0 5 0 5"
+                         x:Name="rbWoman"
+                         Click="rbWoman_Click"/>
             <TextBlock Text="Дата рождения"
                        FontSize="15"/>
-            <TextBox Margin="0 5 0 5"/>
+            <TextBox Margin="0 5 0 5" x:Name="txbDate"/>
             <TextBlock Text="Номер телефона"
                        FontSize="15"/>
-            <TextBox Margin="0 5 0 5"/>
+            <TextBox Margin="0 5 0 5" x:Name="txbPhone"/>
             
 
         </StackPanel>
@@ -59,6 +63,7 @@
                 VerticalAlignment="Bottom"
                 Margin="250 0 0 20"
                 FontSize="15"
-                Content="Далее"/>
+                Content="Далее"
+                Click="btnNextReg_Click"/>
     </Grid>
 </Page>
