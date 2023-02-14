@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static BakeryKK.Model.AppData;
+using BakeryKK.Model;
 
 namespace BakeryKK.Pages.Registration
 {
@@ -26,21 +28,35 @@ namespace BakeryKK.Pages.Registration
             
         }
 
-        private void btnNextReg_Click(object sender, RoutedEventArgs e)
+        public void btnNextReg_Click(object sender, RoutedEventArgs e)
         {
             string FName = txbFName.Text;
             string LName = txbLName.Text;
             string Patronymic = txbPatronymic.Text;
+            string genderCode;
             if (rbMan.IsChecked == true)
             {
-                string gender = "м";
+                genderCode = "м";
             }
             else
             {
-                string gender = "ж";
+                genderCode = "ж";
             }
             string Date = txbDate.Text;
             string Phone = txbPhone.Text;
+
+            string Login = txbFLogin.Text;
+            string Password = txbPassword.Text;
+
+            db.Client.Add(new Client());
+            {
+                AppData.db.Client.Add(FName);
+                AppData.db.Client.Add(LName);
+                AppData.db.Client.Add(Patronymic);
+                AppData.db.Client.Add(genderCode);
+                AppData.db.Client.Add(Date);
+                AppData.db.Client.Add(Phone);
+            }
 
             NavigationService.Navigate(new AccountUser());
         }

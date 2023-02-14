@@ -17,19 +17,19 @@
                FontSize="30"/>
         <StackPanel HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Width="400"
+                    Width="500"
                     Margin="30 0 0 0">
             <TextBlock Text="Имя"
-                       FontSize="15"/>
+                       FontSize="10"/>
             <TextBox Margin="0 5 0 5" x:Name="txbFName"/>
             <TextBlock Text="Фамилия"
-                       FontSize="15"/>
+                       FontSize="10"/>
             <TextBox Margin="0 5 0 5" x:Name="txbLName"/>
             <TextBlock Text="Отчество"
-                       FontSize="15"/>
+                       FontSize="10"/>
             <TextBox Margin="0 5 0 5" x:Name="txbPatronymic"/>
             <TextBlock Text="Укажите свой пол"
-                       FontSize="15"
+                       FontSize="10"
                        Margin="0 5 0 5"/>
             <RadioButton Content="Мужской"
                          Margin="0 5 0 5"
@@ -40,11 +40,17 @@
                          x:Name="rbWoman"
                          Click="rbWoman_Click"/>
             <TextBlock Text="Дата рождения"
-                       FontSize="15"/>
+                       FontSize="10"/>
             <TextBox Margin="0 5 0 5" x:Name="txbDate"/>
             <TextBlock Text="Номер телефона"
-                       FontSize="15"/>
+                       FontSize="10"/>
             <TextBox Margin="0 5 0 5" x:Name="txbPhone"/>
+            <TextBlock Text="Логин"
+                       FontSize="10"/>
+            <TextBox Margin="0 5 0 5" x:Name="txbFLogin"/>
+            <TextBlock Text="Пароль"
+                       FontSize="10"/>
+            <TextBox Margin="0 5 0 5" x:Name="txbPassword"/>
             
 
         </StackPanel>
@@ -63,7 +69,7 @@
                 VerticalAlignment="Bottom"
                 Margin="250 0 0 20"
                 FontSize="15"
-                Content="Далее"
+                Content="Зарегистрироваться"
                 Click="btnNextReg_Click"/>
     </Grid>
 </Page>

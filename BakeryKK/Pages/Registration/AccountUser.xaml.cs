@@ -35,7 +35,7 @@ namespace BakeryKK.Pages.Registration
 
             db.Client.Add(new Client());
             {
-                FName
+                
             }
         }
     }
