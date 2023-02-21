@@ -30,9 +30,7 @@ namespace BakeryKK.Pages.Registration
 
         public void btnNextReg_Click(object sender, RoutedEventArgs e)
         {
-            string FName = txbFName.Text;
-            string LName = txbLName.Text;
-            string Patronymic = txbPatronymic.Text;
+
             string genderCode;
             if (rbMan.IsChecked == true)
             {
@@ -42,21 +40,33 @@ namespace BakeryKK.Pages.Registration
             {
                 genderCode = "ж";
             }
-            string Date = txbDate.Text;
-            string Phone = txbPhone.Text;
+            
 
             string Login = txbFLogin.Text;
             string Password = txbPassword.Text;
 
-            db.Client.Add(new Client());
+            // добавление пользоватля в таблицу client
+
+            db.Client.Add(new Model.Client
             {
-                AppData.db.Client.Add(FName);
-                AppData.db.Client.Add(LName);
-                AppData.db.Client.Add(Patronymic);
-                AppData.db.Client.Add(genderCode);
-                AppData.db.Client.Add(Date);
-                AppData.db.Client.Add(Phone);
-            }
+                FirstName = txbFName.Text,
+                LastName = txbLName.Text,
+                Patronymic = txbPatronymic.Text,
+                Phone = txbPhone.Text,
+                Gender = genderCode,
+
+
+            });
+
+            //добавления логина и пароля в таблицу регистрация
+
+            db.Register.Add(new Model.Register
+            {
+                Login = txbFLogin.Text,
+                Password = txbPassword.Text
+            });
+            
+            db.SaveChanges();
 
             NavigationService.Navigate(new AccountUser());
         }
