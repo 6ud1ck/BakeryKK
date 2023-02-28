@@ -76,6 +76,7 @@ namespace BakeryKK.Pages.Registration
             if (rbMan.IsChecked == true)
             {
                 rbWoman.IsChecked = false;
+                
             }
             else if (rbWoman.IsChecked == true)
             {

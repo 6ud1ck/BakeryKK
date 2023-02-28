@@ -68,6 +68,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\EditProd\AddEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EditProd\Edit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ListProd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ProductList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -143,6 +155,15 @@
     </Compile>
     <Compile Include="Pages\Authorization.xaml.cs">
       <DependentUpon>Authorization.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditProd\AddEdit.xaml.cs">
+      <DependentUpon>AddEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditProd\Edit.xaml.cs">
+      <DependentUpon>Edit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ListProd.xaml.cs">
+      <DependentUpon>ListProd.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ProductList.xaml.cs">
       <DependentUpon>ProductList.xaml</DependentUpon>
