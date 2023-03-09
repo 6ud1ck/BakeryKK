@@ -62,5 +62,10 @@ namespace BakeryKK.Pages
             AddEdit addEditProductWindow = new AddEdit();
             NavigationService.Navigate(new EditProd.AddEdit());
         }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

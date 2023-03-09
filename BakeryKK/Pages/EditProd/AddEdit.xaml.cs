@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static BakeryKK.Model.AppData;
 using BakeryKK.Pages.EditProd;
+using Microsoft.Win32;
 
 namespace BakeryKK.Pages.EditProd
 {
@@ -81,9 +82,9 @@ namespace BakeryKK.Pages.EditProd
             {
                 //изменение товара
 
-                editProduct.ProductName = TbNameProduct.Text;
+                editProduct.Title = TbNameProduct.Text;
                 editProduct.Description = TbDisc.Text;
-                editProduct.IdProdType = (CMBTypeProduct.SelectedItem as ProductType).IdProdType;
+                editProduct.ProdTypeID = (CMBTypeProduct.SelectedItem as ProductType).ID;
                 if (pathPhoto != null)
                 {
                     editProduct.Image = File.ReadAllBytes(pathPhoto);
@@ -95,21 +96,33 @@ namespace BakeryKK.Pages.EditProd
             {
                 //добавление товара
                 Product product = new Product();
-                product.ProductName = TbNameProduct.Text;
+                product.Title = TbNameProduct.Text;
                 product.Description = TbDisc.Text;
-                product.IdProdType = (CMBTypeProduct.SelectedItem as ProductType).IdProdType;
+                product.ProdTypeID = (CMBTypeProduct.SelectedItem as ProductType).ID;
                 if (pathPhoto != null)
                 {
                     product.Image = File.ReadAllBytes(pathPhoto);
                 }
 
-                Context.Product.Add(product);
+                db.Product.Add(product);
 
-                Context.SaveChanges();
+                db.SaveChanges();
                 MessageBox.Show("OK");
             }
 
-            this.Close();
+            
+        }
+
+        private void BtnChooseImage_Click(object sender, RoutedEventArgs e)
+        {
+            
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                ImgProduct.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                pathPhoto = openFileDialog.FileName;
+            }
+            
         }
     }
 }

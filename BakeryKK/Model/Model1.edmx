@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище KotlovKolisnik_BakeryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище KotlovKolisnik_BakeryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountUser">
           <Key>
             <PropertyRef Name="ID" />
@@ -300,7 +300,8 @@
             <End Role="PurchaseProduct" EntitySet="PurchaseProduct" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KotlovKolisnik_BakeryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -369,13 +370,12 @@
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="ManufactureID" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProdTypeID" Type="Int32" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
           <NavigationProperty Name="ProductType" Relationship="Self.FK_Product_ProductType" FromRole="Product" ToRole="ProductType" />
           <NavigationProperty Name="ProductHistory" Relationship="Self.FK_ProductHistory_Product" FromRole="Product" ToRole="ProductHistory" />
           <NavigationProperty Name="PurchaseProduct" Relationship="Self.FK_PurchaseProduct_Product" FromRole="Product" ToRole="PurchaseProduct" />
-          <Property Name="ProdTypeID" Type="Int32" />
-          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="ProductType1" Relationship="KotlovKolisnik_BakeryModel.FK_Product_ProductType1" FromRole="Product" ToRole="ProductType" />
         </EntityType>
         <EntityType Name="ProductHistory">
           <Key>
@@ -392,10 +392,9 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Product_ProductType" FromRole="ProductType" ToRole="Product" />
-          <NavigationProperty Name="Product1" Relationship="KotlovKolisnik_BakeryModel.FK_Product_ProductType1" FromRole="ProductType" ToRole="Product" />
         </EntityType>
         <EntityType Name="purchase">
           <Key>
@@ -499,7 +498,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Product">
-              <PropertyRef Name="Description" />
+              <PropertyRef Name="ProdTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -587,23 +586,7 @@
             <End Role="purchase" EntitySet="purchase" />
             <End Role="PurchaseProduct" EntitySet="PurchaseProduct" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product_ProductType1" Association="KotlovKolisnik_BakeryModel.FK_Product_ProductType1">
-            <End Role="ProductType" EntitySet="ProductType" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
         </EntityContainer>
-        <Association Name="FK_Product_ProductType1">
-          <End Type="KotlovKolisnik_BakeryModel.ProductType" Role="ProductType" Multiplicity="0..1" />
-          <End Type="KotlovKolisnik_BakeryModel.Product" Role="Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductType">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="ProdTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -666,14 +649,14 @@
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="KotlovKolisnik_BakeryModel.Product">
               <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="ProdTypeID" ColumnName="ProdTypeID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="ManufactureID" ColumnName="ManufactureID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ProdTypeID" ColumnName="ProdTypeID" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
