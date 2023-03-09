@@ -29,5 +29,10 @@ namespace BakeryKK.Pages
         {
               
         }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

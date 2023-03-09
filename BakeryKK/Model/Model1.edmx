@@ -62,7 +62,9 @@
           <Property Name="Cost" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="ManufactureID" Type="int" Nullable="false" />
-          <Property Name="Type" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProdTypeID" Type="int" />
+          <Property Name="Image" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="ProductHistory">
           <Key>
@@ -154,7 +156,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Product">
-              <PropertyRef Name="Type" />
+              <PropertyRef Name="ProdTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -302,6 +304,15 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KotlovKolisnik_BakeryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccountUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_AccountUser_Client" FromRole="AccountUser" ToRole="Client" />
+        </EntityType>
         <EntityType Name="Client">
           <Key>
             <PropertyRef Name="ID" />
@@ -313,10 +324,10 @@
           <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Phone" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="AccountUserID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="AccountUser" Relationship="Self.FK_AccountUser_Client" FromRole="Client" ToRole="AccountUser" />
           <NavigationProperty Name="Gender1" Relationship="Self.FK_Client_Gender" FromRole="Client" ToRole="Gender" />
           <NavigationProperty Name="purchase" Relationship="Self.FK_purchase_Client" FromRole="Client" ToRole="purchase" />
-          <Property Name="AccountUserID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="AccountUser" Relationship="KotlovKolisnik_BakeryModel.FK_AccountUser_Client" FromRole="Client" ToRole="AccountUser" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -357,11 +368,14 @@
           <Property Name="Cost" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="ManufactureID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
+          <NavigationProperty Name="ProductType" Relationship="Self.FK_Product_ProductType" FromRole="Product" ToRole="ProductType" />
           <NavigationProperty Name="ProductHistory" Relationship="Self.FK_ProductHistory_Product" FromRole="Product" ToRole="ProductHistory" />
-          <Property Name="Type" Type="Int32" />
-          <NavigationProperty Name="ProductType" Relationship="KotlovKolisnik_BakeryModel.FK_Product_ProductType" FromRole="Product" ToRole="ProductType" />
-          <NavigationProperty Name="PurchaseProduct" Relationship="KotlovKolisnik_BakeryModel.FK_PurchaseProduct_Product" FromRole="Product" ToRole="PurchaseProduct" />
+          <NavigationProperty Name="PurchaseProduct" Relationship="Self.FK_PurchaseProduct_Product" FromRole="Product" ToRole="PurchaseProduct" />
+          <Property Name="ProdTypeID" Type="Int32" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="ProductType1" Relationship="KotlovKolisnik_BakeryModel.FK_Product_ProductType1" FromRole="Product" ToRole="ProductType" />
         </EntityType>
         <EntityType Name="ProductHistory">
           <Key>
@@ -374,6 +388,15 @@
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="Self.FK_ProductHistory_Product" FromRole="ProductHistory" ToRole="Product" />
         </EntityType>
+        <EntityType Name="ProductType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_ProductType" FromRole="ProductType" ToRole="Product" />
+          <NavigationProperty Name="Product1" Relationship="KotlovKolisnik_BakeryModel.FK_Product_ProductType1" FromRole="ProductType" ToRole="Product" />
+        </EntityType>
         <EntityType Name="purchase">
           <Key>
             <PropertyRef Name="ID" />
@@ -382,10 +405,21 @@
           <Property Name="ClientID" Type="Int32" Nullable="false" />
           <Property Name="DateBuy" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Client" Relationship="Self.FK_purchase_Client" FromRole="purchase" ToRole="Client" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_purchase_Employee" FromRole="purchase" ToRole="Employee" />
-          <Property Name="ProductID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="PurchaseProduct" Relationship="KotlovKolisnik_BakeryModel.FK_PurchaseProduct_purchase" FromRole="purchase" ToRole="PurchaseProduct" />
+          <NavigationProperty Name="PurchaseProduct" Relationship="Self.FK_PurchaseProduct_purchase" FromRole="purchase" ToRole="PurchaseProduct" />
+        </EntityType>
+        <EntityType Name="PurchaseProduct">
+          <Key>
+            <PropertyRef Name="PurchaseID" />
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="PurchaseID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_PurchaseProduct_Product" FromRole="PurchaseProduct" ToRole="Product" />
+          <NavigationProperty Name="purchase" Relationship="Self.FK_PurchaseProduct_purchase" FromRole="PurchaseProduct" ToRole="purchase" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -397,6 +431,18 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <Association Name="FK_AccountUser_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="AccountUser" Type="Self.AccountUser" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AccountUser">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Client_Gender">
           <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
           <End Role="Client" Type="Self.Client" Multiplicity="*" />
@@ -445,6 +491,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Product_ProductType">
+          <End Role="ProductType" Type="Self.ProductType" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="Description" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductHistory_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="ProductHistory" Type="Self.ProductHistory" Multiplicity="*" />
@@ -457,15 +515,46 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PurchaseProduct_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="PurchaseProduct" Type="Self.PurchaseProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PurchaseProduct">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseProduct_purchase">
+          <End Role="purchase" Type="Self.purchase" Multiplicity="1" />
+          <End Role="PurchaseProduct" Type="Self.PurchaseProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="purchase">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PurchaseProduct">
+              <PropertyRef Name="PurchaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccountUser" EntityType="Self.AccountUser" />
           <EntitySet Name="Client" EntityType="Self.Client" />
           <EntitySet Name="Employee" EntityType="Self.Employee" />
           <EntitySet Name="Gender" EntityType="Self.Gender" />
           <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" />
           <EntitySet Name="Product" EntityType="Self.Product" />
           <EntitySet Name="ProductHistory" EntityType="Self.ProductHistory" />
+          <EntitySet Name="ProductType" EntityType="Self.ProductType" />
           <EntitySet Name="purchase" EntityType="Self.purchase" />
+          <EntitySet Name="PurchaseProduct" EntityType="Self.PurchaseProduct" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_AccountUser_Client" Association="Self.FK_AccountUser_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="AccountUser" EntitySet="AccountUser" />
+          </AssociationSet>
           <AssociationSet Name="FK_Client_Gender" Association="Self.FK_Client_Gender">
             <End Role="Gender" EntitySet="Gender" />
             <End Role="Client" EntitySet="Client" />
@@ -482,71 +571,28 @@
             <End Role="Manufacturer" EntitySet="Manufacturer" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductType" Association="Self.FK_Product_ProductType">
+            <End Role="ProductType" EntitySet="ProductType" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProductHistory_Product" Association="Self.FK_ProductHistory_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="ProductHistory" EntitySet="ProductHistory" />
           </AssociationSet>
-          <EntitySet Name="AccountUser" EntityType="KotlovKolisnik_BakeryModel.AccountUser" />
-          <EntitySet Name="ProductType" EntityType="KotlovKolisnik_BakeryModel.ProductType" />
-          <EntitySet Name="PurchaseProduct" EntityType="KotlovKolisnik_BakeryModel.PurchaseProduct" />
-          <AssociationSet Name="FK_AccountUser_Client" Association="KotlovKolisnik_BakeryModel.FK_AccountUser_Client">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="AccountUser" EntitySet="AccountUser" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_ProductType" Association="KotlovKolisnik_BakeryModel.FK_Product_ProductType">
-            <End Role="ProductType" EntitySet="ProductType" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseProduct_Product" Association="KotlovKolisnik_BakeryModel.FK_PurchaseProduct_Product">
+          <AssociationSet Name="FK_PurchaseProduct_Product" Association="Self.FK_PurchaseProduct_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="PurchaseProduct" EntitySet="PurchaseProduct" />
           </AssociationSet>
-          <AssociationSet Name="FK_PurchaseProduct_purchase" Association="KotlovKolisnik_BakeryModel.FK_PurchaseProduct_purchase">
+          <AssociationSet Name="FK_PurchaseProduct_purchase" Association="Self.FK_PurchaseProduct_purchase">
             <End Role="purchase" EntitySet="purchase" />
             <End Role="PurchaseProduct" EntitySet="PurchaseProduct" />
           </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductType1" Association="KotlovKolisnik_BakeryModel.FK_Product_ProductType1">
+            <End Role="ProductType" EntitySet="ProductType" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="AccountUser">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Client" Relationship="KotlovKolisnik_BakeryModel.FK_AccountUser_Client" FromRole="AccountUser" ToRole="Client" />
-        </EntityType>
-        <EntityType Name="ProductType">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Product" Relationship="KotlovKolisnik_BakeryModel.FK_Product_ProductType" FromRole="ProductType" ToRole="Product" />
-        </EntityType>
-        <EntityType Name="PurchaseProduct">
-          <Key>
-            <PropertyRef Name="PurchaseID" />
-            <PropertyRef Name="ProductID" />
-          </Key>
-          <Property Name="PurchaseID" Type="Int32" Nullable="false" />
-          <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="KotlovKolisnik_BakeryModel.FK_PurchaseProduct_Product" FromRole="PurchaseProduct" ToRole="Product" />
-          <NavigationProperty Name="purchase" Relationship="KotlovKolisnik_BakeryModel.FK_PurchaseProduct_purchase" FromRole="PurchaseProduct" ToRole="purchase" />
-        </EntityType>
-        <Association Name="FK_AccountUser_Client">
-          <End Type="KotlovKolisnik_BakeryModel.Client" Role="Client" Multiplicity="1" />
-          <End Type="KotlovKolisnik_BakeryModel.AccountUser" Role="AccountUser" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="AccountUser">
-              <PropertyRef Name="ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_ProductType">
+        <Association Name="FK_Product_ProductType1">
           <End Type="KotlovKolisnik_BakeryModel.ProductType" Role="ProductType" Multiplicity="0..1" />
           <End Type="KotlovKolisnik_BakeryModel.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -554,31 +600,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Product">
-              <PropertyRef Name="Type" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseProduct_Product">
-          <End Type="KotlovKolisnik_BakeryModel.Product" Role="Product" Multiplicity="1" />
-          <End Type="KotlovKolisnik_BakeryModel.PurchaseProduct" Role="PurchaseProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PurchaseProduct">
-              <PropertyRef Name="ProductID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseProduct_purchase">
-          <End Type="KotlovKolisnik_BakeryModel.purchase" Role="purchase" Multiplicity="1" />
-          <End Type="KotlovKolisnik_BakeryModel.PurchaseProduct" Role="PurchaseProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="purchase">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PurchaseProduct">
-              <PropertyRef Name="PurchaseID" />
+              <PropertyRef Name="ProdTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -588,10 +610,18 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище KotlovKolisnik_BakeryModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="AccountUser">
+            <EntityTypeMapping TypeName="KotlovKolisnik_BakeryModel.AccountUser">
+              <MappingFragment StoreEntitySet="AccountUser">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Client">
             <EntityTypeMapping TypeName="KotlovKolisnik_BakeryModel.Client">
               <MappingFragment StoreEntitySet="Client">
-                <ScalarProperty Name="AccountUserID" ColumnName="AccountUserID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -599,6 +629,7 @@
                 <ScalarProperty Name="Birthday" ColumnName="Birthday" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="AccountUserID" ColumnName="AccountUserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -635,12 +666,14 @@
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="KotlovKolisnik_BakeryModel.Product">
               <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ProdTypeID" ColumnName="ProdTypeID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="ManufactureID" ColumnName="ManufactureID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -655,14 +688,31 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProductType">
+            <EntityTypeMapping TypeName="KotlovKolisnik_BakeryModel.ProductType">
+              <MappingFragment StoreEntitySet="ProductType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="purchase">
             <EntityTypeMapping TypeName="KotlovKolisnik_BakeryModel.purchase">
               <MappingFragment StoreEntitySet="purchase">
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ClientID" ColumnName="ClientID" />
                 <ScalarProperty Name="DateBuy" ColumnName="DateBuy" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseProduct">
+            <EntityTypeMapping TypeName="KotlovKolisnik_BakeryModel.PurchaseProduct">
+              <MappingFragment StoreEntitySet="PurchaseProduct">
+                <ScalarProperty Name="PurchaseID" ColumnName="PurchaseID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -674,32 +724,6 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AccountUser">
-            <EntityTypeMapping TypeName="KotlovKolisnik_BakeryModel.AccountUser">
-              <MappingFragment StoreEntitySet="AccountUser">
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductType">
-            <EntityTypeMapping TypeName="KotlovKolisnik_BakeryModel.ProductType">
-              <MappingFragment StoreEntitySet="ProductType">
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PurchaseProduct">
-            <EntityTypeMapping TypeName="KotlovKolisnik_BakeryModel.PurchaseProduct">
-              <MappingFragment StoreEntitySet="PurchaseProduct">
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="PurchaseID" ColumnName="PurchaseID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

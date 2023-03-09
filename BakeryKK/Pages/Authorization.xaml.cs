@@ -1,4 +1,5 @@
 ﻿using BakeryKK.Model;
+using BakeryKK.Pages.EditProd;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,9 +31,8 @@ namespace BakeryKK.Pages
         {
             var CurrentUser = AppData.db.AccountUser.FirstOrDefault(u => u.Login == txbLogin.Text && u.Password == txbPassword.Text);
             if (CurrentUser != null)
-            {
-                Authorization authPages = new Authorization();
-                
+            { 
+                NavigationService.Navigate(new ListProd());
             }
             else
             {
