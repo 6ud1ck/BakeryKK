@@ -18,19 +18,21 @@ namespace BakeryKK.Model
         public Product()
         {
             this.ProductHistory = new HashSet<ProductHistory>();
-            this.ProductSale = new HashSet<ProductSale>();
+            this.PurchaseProduct = new HashSet<PurchaseProduct>();
         }
     
         public int ID { get; set; }
         public string Title { get; set; }
-        public decimal Price { get; set; }
+        public decimal Cost { get; set; }
         public int Quantity { get; set; }
-        public int ManufacturerID { get; set; }
+        public int ManufactureID { get; set; }
+        public Nullable<int> Type { get; set; }
     
         public virtual Manufacturer Manufacturer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductHistory> ProductHistory { get; set; }
+        public virtual ProductType ProductType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductSale> ProductSale { get; set; }
+        public virtual ICollection<PurchaseProduct> PurchaseProduct { get; set; }
     }
 }

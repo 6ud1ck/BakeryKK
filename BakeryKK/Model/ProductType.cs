@@ -12,13 +12,18 @@ namespace BakeryKK.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class ClientRegister
+    public partial class ProductType
     {
-        public int ID { get; set; }
-        public int ClientID { get; set; }
-        public int RegisterID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ProductType()
+        {
+            this.Product = new HashSet<Product>();
+        }
     
-        public virtual Client Client { get; set; }
-        public virtual Register Register { get; set; }
+        public int ID { get; set; }
+        public string Type { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Product { get; set; }
     }
 }

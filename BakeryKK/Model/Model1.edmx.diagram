@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a4414cbb6c2a4013a7f5cb020f9ac043" Name="Diagram1">
+        <EntityTypeShape EntityType="KotlovKolisnik_BakeryModel.Client" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="KotlovKolisnik_BakeryModel.Employee" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KotlovKolisnik_BakeryModel.Gender" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KotlovKolisnik_BakeryModel.Manufacturer" Width="1.5" PointX="5.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KotlovKolisnik_BakeryModel.Product" Width="1.5" PointX="8" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KotlovKolisnik_BakeryModel.ProductHistory" Width="1.5" PointX="10.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KotlovKolisnik_BakeryModel.purchase" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KotlovKolisnik_BakeryModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="KotlovKolisnik_BakeryModel.FK_Client_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="KotlovKolisnik_BakeryModel.FK_purchase_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="KotlovKolisnik_BakeryModel.FK_purchase_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="KotlovKolisnik_BakeryModel.FK_Product_Manufacturer" ManuallyRouted="false" />
+        <AssociationConnector Association="KotlovKolisnik_BakeryModel.FK_ProductHistory_Product" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="KotlovKolisnik_BakeryModel.AccountUser" Width="1.5" PointX="5.25" PointY="8.625" />
+        <EntityTypeShape EntityType="KotlovKolisnik_BakeryModel.ProductType" Width="1.5" PointX="5.75" PointY="11.625" />
+        <EntityTypeShape EntityType="KotlovKolisnik_BakeryModel.PurchaseProduct" Width="1.5" PointX="10.25" PointY="1.625" />
+        <AssociationConnector Association="KotlovKolisnik_BakeryModel.FK_AccountUser_Client" />
+        <AssociationConnector Association="KotlovKolisnik_BakeryModel.FK_Product_ProductType" />
+        <AssociationConnector Association="KotlovKolisnik_BakeryModel.FK_PurchaseProduct_Product" />
+        <AssociationConnector Association="KotlovKolisnik_BakeryModel.FK_PurchaseProduct_purchase" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

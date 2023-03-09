@@ -24,5 +24,10 @@ namespace BakeryKK.Pages
         {
             InitializeComponent();
         }
+
+        private void BtnEditProduct_Click(object sender, RoutedEventArgs e)
+        {
+              
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace BakeryKK.Pages
 
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
-            var CurrentUser = AppData.db.Register.FirstOrDefault(u => u.Login == txbLogin.Text && u.Password == txbPassword.Text);
+            var CurrentUser = AppData.db.AccountUser.FirstOrDefault(u => u.Login == txbLogin.Text && u.Password == txbPassword.Text);
             if (CurrentUser != null)
             {
                 Authorization authPages = new Authorization();

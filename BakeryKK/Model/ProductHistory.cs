@@ -17,7 +17,7 @@ namespace BakeryKK.Model
         public int ID { get; set; }
         public int ProductID { get; set; }
         public int QuantityAfter { get; set; }
-        public int QiantityBefore { get; set; }
+        public int QuantityBefore { get; set; }
         public string Type { get; set; }
     
         public virtual Product Product { get; set; }

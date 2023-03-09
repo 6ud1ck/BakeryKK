@@ -12,14 +12,12 @@ namespace BakeryKK.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductSale
+    public partial class AccountUser
     {
         public int ID { get; set; }
-        public int SaleID { get; set; }
-        public int ProductID { get; set; }
-        public int Quantity { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
     
-        public virtual Product Product { get; set; }
-        public virtual Sales Sales { get; set; }
+        public virtual Client Client { get; set; }
     }
 }

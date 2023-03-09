@@ -13,10 +13,10 @@ namespace BakeryKK.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BakeryKotloKolisnikEntities1 : DbContext
+    public partial class Entities : DbContext
     {
-        public BakeryKotloKolisnikEntities1()
-            : base("name=BakeryKotloKolisnikEntities1")
+        public Entities()
+            : base("name=Entities")
         {
         }
     
@@ -26,15 +26,15 @@ namespace BakeryKK.Model
         }
     
         public virtual DbSet<Client> Client { get; set; }
-        public virtual DbSet<ClientRegister> ClientRegister { get; set; }
         public virtual DbSet<Employee> Employee { get; set; }
         public virtual DbSet<Gender> Gender { get; set; }
         public virtual DbSet<Manufacturer> Manufacturer { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<ProductHistory> ProductHistory { get; set; }
-        public virtual DbSet<ProductSale> ProductSale { get; set; }
-        public virtual DbSet<Register> Register { get; set; }
-        public virtual DbSet<Sales> Sales { get; set; }
+        public virtual DbSet<purchase> purchase { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<AccountUser> AccountUser { get; set; }
+        public virtual DbSet<ProductType> ProductType { get; set; }
+        public virtual DbSet<PurchaseProduct> PurchaseProduct { get; set; }
     }
 }

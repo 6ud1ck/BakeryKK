@@ -17,8 +17,7 @@ namespace BakeryKK.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Client()
         {
-            this.Sales = new HashSet<Sales>();
-            this.ClientRegister = new HashSet<ClientRegister>();
+            this.purchase = new HashSet<purchase>();
         }
     
         public int ID { get; set; }
@@ -28,10 +27,11 @@ namespace BakeryKK.Model
         public System.DateTime Birthday { get; set; }
         public string Phone { get; set; }
         public string Gender { get; set; }
+        public string AccountUserID { get; set; }
     
+        public virtual Gender Gender1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sales> Sales { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClientRegister> ClientRegister { get; set; }
+        public virtual ICollection<purchase> purchase { get; set; }
+        public virtual AccountUser AccountUser { get; set; }
     }
 }

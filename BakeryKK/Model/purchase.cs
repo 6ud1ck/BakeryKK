@@ -12,22 +12,23 @@ namespace BakeryKK.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Sales
+    public partial class purchase
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Sales()
+        public purchase()
         {
-            this.ProductSale = new HashSet<ProductSale>();
+            this.PurchaseProduct = new HashSet<PurchaseProduct>();
         }
     
         public int ID { get; set; }
-        public int CliientID { get; set; }
-        public System.DateTime Date { get; set; }
+        public int ClientID { get; set; }
+        public System.DateTime DateBuy { get; set; }
         public int EmployeeID { get; set; }
+        public string ProductID { get; set; }
     
         public virtual Client Client { get; set; }
         public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductSale> ProductSale { get; set; }
+        public virtual ICollection<PurchaseProduct> PurchaseProduct { get; set; }
     }
 }

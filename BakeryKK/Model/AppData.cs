@@ -8,6 +8,6 @@ namespace BakeryKK.Model
 {
     public static class AppData
     {
-        public static BakeryKotloKolisnikEntities1 db = new BakeryKotloKolisnikEntities1();
+        public static Entities db = new Entities();
     }
 }

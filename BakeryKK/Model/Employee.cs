@@ -17,7 +17,7 @@ namespace BakeryKK.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employee()
         {
-            this.Sales = new HashSet<Sales>();
+            this.purchase = new HashSet<purchase>();
         }
     
         public int ID { get; set; }
@@ -25,10 +25,10 @@ namespace BakeryKK.Model
         public string LastName { get; set; }
         public string Patronymic { get; set; }
         public string Phone { get; set; }
-        public string INN { get; set; }
         public string Email { get; set; }
+        public string INN { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sales> Sales { get; set; }
+        public virtual ICollection<purchase> purchase { get; set; }
     }
 }

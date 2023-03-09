@@ -60,7 +60,7 @@ namespace BakeryKK.Pages.Registration
 
             //добавления логина и пароля в таблицу регистрация
 
-            db.Register.Add(new Model.Register
+            db.AccountUser.Add(new Model.AccountUser
             {
                 Login = txbFLogin.Text,
                 Password = txbPassword.Text
@@ -68,7 +68,7 @@ namespace BakeryKK.Pages.Registration
             
             db.SaveChanges();
 
-            NavigationService.Navigate(new AccountUser());
+            
         }
 
         private void rbMan_Click(object sender, RoutedEventArgs e)
