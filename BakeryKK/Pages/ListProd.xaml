@@ -8,7 +8,9 @@
       Height="450" 
       Width="800"
       Title="ListProd"
-      Background="White">
+      Background="White" 
+      ShowsNavigationUI="False">
+
 
     <Grid>
         <Grid.RowDefinitions>
@@ -43,7 +45,7 @@
                     <Border Width="150"
                             Height="250"
                             BorderThickness="1"
-                            BorderBrush="Blue"
+                            BorderBrush="Pink"
                             Margin="8"
                             >
                         <StackPanel>
@@ -53,17 +55,17 @@
                                 <Image.Source>
                                     <Binding Path="Image">
                                         <Binding.TargetNullValue>
-                                            <ImageSource>/Res/Image/fa4a29295f107a68651a11d7ad082702</ImageSource>
+                                            <Image Source="/Res/Image/vatrushkastvorogizum.jpg"/>
                                         </Binding.TargetNullValue>
                                     </Binding>
                                 </Image.Source>
 
                             </Image>
 
-                            <TextBlock Text="{Binding ProductName}" 
+                            <TextBlock Text="{Binding Title}" 
                                        FontSize="14"
                                        Margin="10 0 0 0"/>
-                            <TextBlock Text="{Binding ProductType.TypeName}" 
+                            <TextBlock Text="{Binding Cost}" 
                                        FontSize="14"
                                        Margin="10 0 0 0"/>
 
@@ -72,7 +74,7 @@
                                     Height="30"
                                     Width="100"
                                     Margin="10"
-                                  />
+                                    Click="BtnEditProduct_Click_1"/>
                         </StackPanel>
                     </Border>
 
@@ -89,6 +91,6 @@
                 Height="30"
                 HorizontalAlignment="Right"
                 Margin="0 0 30 0"
-               />
+                Click="BtnAddProduct_Click_1"/>
     </Grid>
 </Page>

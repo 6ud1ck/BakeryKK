@@ -75,7 +75,7 @@ namespace BakeryKK.Pages.EditProd
 
         private void BtnAddEdit_Click(object sender, RoutedEventArgs e)
         {
-            // валидация
+            //валидация
 
 
             if (isEdit)
@@ -110,19 +110,21 @@ namespace BakeryKK.Pages.EditProd
                 MessageBox.Show("OK");
             }
 
-            
+
         }
 
         private void BtnChooseImage_Click(object sender, RoutedEventArgs e)
         {
-            
+
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
                 ImgProduct.Source = new BitmapImage(new Uri(openFileDialog.FileName));
                 pathPhoto = openFileDialog.FileName;
             }
-            
+
         }
+
+        
     }
 }

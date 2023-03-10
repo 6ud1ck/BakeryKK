@@ -27,7 +27,7 @@ namespace BakeryKK.Model
         public System.DateTime Birthday { get; set; }
         public string Phone { get; set; }
         public string Gender { get; set; }
-        public string AccountUserID { get; set; }
+        public Nullable<int> AccountUserID { get; set; }
     
         public virtual AccountUser AccountUser { get; set; }
         public virtual Gender Gender1 { get; set; }

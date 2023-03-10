@@ -76,15 +76,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\ProductList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\Registration\Registration.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\WelcomPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -154,14 +146,8 @@
     <Compile Include="Pages\ListProd.xaml.cs">
       <DependentUpon>ListProd.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ProductList.xaml.cs">
-      <DependentUpon>ProductList.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Registration\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\WelcomPage.xaml.cs">
-      <DependentUpon>WelcomPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

@@ -7,7 +7,8 @@
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="400"
       Title="AddEdit"
-      Background="White">
+      Background="White"
+      ShowsNavigationUI="False" >
 
     <Grid>
         <StackPanel Orientation="Vertical" 

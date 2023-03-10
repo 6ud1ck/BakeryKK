@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BakeryKK.Model;
+using BakeryKK.Pages.EditProd;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static BakeryKK.Model.AppData;
+using BakeryKK.Pages.EditProd;
 
 namespace BakeryKK.Pages
 {
@@ -23,16 +27,42 @@ namespace BakeryKK.Pages
         public ListProd()
         {
             InitializeComponent();
+
+            GetListProduct();
         }
 
-        private void BtnEditProduct_Click(object sender, RoutedEventArgs e)
+        private void GetListProduct()
         {
-              
+            List<Product> products = new List<Product>();
+            products = db.Product.ToList();
+
+            // поиск, сортировка, фильтрация
+
+            LvProduct.ItemsSource = products;
         }
 
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        private void BtnAddProduct_Click(object sender, RoutedEventArgs e)
         {
+            AddEdit addEditProductWindow = new AddEdit();
+            NavigationService.Navigate(new EditProd.AddEdit());
+        }
+        private void BtnAddProduct_Click_1(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Pages.EditProd.AddEdit());
+        }
 
+        private void BtnEditProduct_Click_1(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button == null)
+            {
+                return;
+            }
+
+            var product = button.DataContext as Product;
+
+
+            NavigationService.Navigate(new Pages.EditProd.AddEdit());
         }
     }
 }
