@@ -42,13 +42,15 @@
                     <Border Width="150"
                             Height="250"
                             BorderThickness="1"
-                            BorderBrush="Blue"
+                            BorderBrush="Pink"
                             Margin="8"
                             >
-                        <StackPanel>
+                        <StackPanel
+                            Background="LightPink">
                             <Image Height="150" 
                                    Width="120"
-                                   Margin="0 8 0 0">
+                                   Margin="0 8 0 0"
+                                   >
                                 <Image.Source>
                                     <Binding Path="Image">
                                         <Binding.TargetNullValue>
