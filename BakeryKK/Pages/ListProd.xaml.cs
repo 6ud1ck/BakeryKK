@@ -64,5 +64,10 @@ namespace BakeryKK.Pages
 
             NavigationService.Navigate(new Pages.EditProd.AddEdit());
         }
+
+        private void btnAddToCartProduct_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
