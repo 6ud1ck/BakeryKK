@@ -23,10 +23,11 @@ namespace BakeryKK.Model
     
         public int ID { get; set; }
         public string Title { get; set; }
-        public Nullable<decimal> Cost { get; set; }
-        public Nullable<int> ManufactureID { get; set; }
+        public decimal Cost { get; set; }
+        public int Quantity { get; set; }
+        public int ManufactureID { get; set; }
         public string Description { get; set; }
-        public Nullable<int> ProdTypeID { get; set; }
+        public int ProdTypeID { get; set; }
         public byte[] Image { get; set; }
     
         public virtual Manufacturer Manufacturer { get; set; }

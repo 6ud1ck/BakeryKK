@@ -59,10 +59,11 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="Cost" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="ManufactureID" Type="int" />
+          <Property Name="Cost" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="ManufactureID" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="50" />
-          <Property Name="ProdTypeID" Type="int" />
+          <Property Name="ProdTypeID" Type="int" Nullable="false" />
           <Property Name="Image" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="ProductHistory">
@@ -136,7 +137,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_Manufacturer">
-          <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="0..1" />
+          <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Manufacturer">
@@ -148,7 +149,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_ProductType">
-          <End Role="ProductType" Type="Self.ProductType" Multiplicity="0..1" />
+          <End Role="ProductType" Type="Self.ProductType" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProductType">
@@ -413,10 +414,11 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="Cost" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="ManufactureID" Type="Int32" />
+          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="ManufactureID" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ProdTypeID" Type="Int32" />
+          <Property Name="ProdTypeID" Type="Int32" Nullable="false" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Manufacturer" Relationship="KotlovKolisnik_BakeryModel.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
           <NavigationProperty Name="ProductType" Relationship="KotlovKolisnik_BakeryModel.FK_Product_ProductType" FromRole="Product" ToRole="ProductType" />
@@ -525,7 +527,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_Manufacturer">
-          <End Type="KotlovKolisnik_BakeryModel.Manufacturer" Role="Manufacturer" Multiplicity="0..1" />
+          <End Type="KotlovKolisnik_BakeryModel.Manufacturer" Role="Manufacturer" Multiplicity="1" />
           <End Type="KotlovKolisnik_BakeryModel.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Manufacturer">
@@ -537,7 +539,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_ProductType">
-          <End Type="KotlovKolisnik_BakeryModel.ProductType" Role="ProductType" Multiplicity="0..1" />
+          <End Type="KotlovKolisnik_BakeryModel.ProductType" Role="ProductType" Multiplicity="1" />
           <End Type="KotlovKolisnik_BakeryModel.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProductType">
@@ -650,6 +652,7 @@
                 <ScalarProperty Name="ProdTypeID" ColumnName="ProdTypeID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ManufactureID" ColumnName="ManufactureID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="ID" ColumnName="ID" />

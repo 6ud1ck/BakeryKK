@@ -1,5 +1,4 @@
 ﻿using BakeryKK.Model;
-using BakeryKK.Pages.EditProd;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,19 +13,31 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static BakeryKK.Model.AppData;
-using BakeryKK.Pages.EditProd;
+using static BakeryKK.ClassHelper.EFClass;
+using BakeryKK.Pages;
+using BakeryKK.Windows;
 
 namespace BakeryKK.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для ListProd.xaml
-    /// </summary>
+    
     public partial class ListProd : Page
     {
+        List<string> strings = new List<string>()
+        {
+            "По умолчанию",
+            "По возрастанию",
+            "По убыванию",
+            "По цене",
+            "В наличии"
+
+        };
+
         public ListProd()
         {
             InitializeComponent();
+
+            cmbSort.ItemsSource = strings;
+            cmbSort.SelectedIndex = 0;
 
             GetListProduct();
         }
@@ -36,23 +47,48 @@ namespace BakeryKK.Pages
             List<Product> products = new List<Product>();
             products = db.Product.ToList();
 
+            var StartIndex = cmbSort.SelectedIndex;
+
             // поиск, сортировка, фильтрация
+
+
+            //Сортировка
+
+            switch (StartIndex)
+            {
+                case 0:
+                    products = products.OrderBy(i => i.ID).ToList();
+                    break;
+                case 1:
+                    products = products.OrderBy(i => i.Title.ToLower()).ToList();
+                    break;
+                case 2:
+                    products = products.OrderByDescending(i => i.Title.ToLower()).ToList();
+                    break;
+                case 3:
+                    products = products.OrderBy(i => i.Cost).ToList();
+                    break;
+                case 4:
+                    products = products.OrderBy(i => i.Quantity).ToList();
+                    break;
+
+                default:
+                    break;
+            }
 
             LvProduct.ItemsSource = products;
         }
 
-        private void BtnAddProduct_Click(object sender, RoutedEventArgs e)
-        {
-            AddEdit addEditProductWindow = new AddEdit();
-            NavigationService.Navigate(new EditProd.AddEdit());
-        }
         private void BtnAddProduct_Click_1(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Pages.EditProd.AddEdit());
+            EditWindow editWindow = new EditWindow();
+            editWindow.ShowDialog();
+            
         }
 
-        private void BtnEditProduct_Click_1(object sender, RoutedEventArgs e)
+        private void BtnEditProduct_Click(object sender, RoutedEventArgs e)
         {
+
             var button = sender as Button;
             if (button == null)
             {
@@ -61,13 +97,15 @@ namespace BakeryKK.Pages
 
             var product = button.DataContext as Product;
 
+            EditWindow editWindow = new EditWindow(product);
+            editWindow.ShowDialog();
 
-            NavigationService.Navigate(new Pages.EditProd.AddEdit());
-        }
+            GetListProduct();           
+        } 
 
-        private void btnAddToCartProduct_Click(object sender, RoutedEventArgs e)
+        private void cmbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            GetListProduct();
         }
     }
 }

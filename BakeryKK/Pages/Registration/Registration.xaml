@@ -21,7 +21,7 @@
                     Margin="30 0 0 0">
             <TextBlock Text="Имя"
                        FontSize="10"/>
-            <TextBox Margin="0 5 0 5" x:Name="txbFName"/>
+            <TextBox Margin="0 5 0 5" x:Name="txbFName" TextChanged="txbFName_TextChanged"/>
             <TextBlock Text="Фамилия"
                        FontSize="10"/>
             <TextBox Margin="0 5 0 5" x:Name="txbLName"/>

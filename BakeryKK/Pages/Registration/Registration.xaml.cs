@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static BakeryKK.Model.AppData;
+using static BakeryKK.ClassHelper.EFClass;
 using BakeryKK.Model;
 
 namespace BakeryKK.Pages.Registration
@@ -94,6 +94,11 @@ namespace BakeryKK.Pages.Registration
             {
                 rbMan.IsChecked = false;
             }
+        }
+
+        private void txbFName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

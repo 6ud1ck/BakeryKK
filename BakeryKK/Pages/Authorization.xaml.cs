@@ -1,5 +1,6 @@
-﻿using BakeryKK.Model;
-using BakeryKK.Pages.EditProd;
+﻿using BakeryKK.ClassHelper;
+using BakeryKK.Model;
+using BakeryKK.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace BakeryKK.Pages
 
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
-            var CurrentUser = AppData.db.AccountUser.FirstOrDefault(u => u.Login == txbLogin.Text && u.Password == txbPassword.Text);
+            var CurrentUser = EFClass.db.AccountUser.FirstOrDefault(u => u.Login == txbLogin.Text && u.Password == txbPassword.Text);
             if (CurrentUser != null)
             { 
                 NavigationService.Navigate(new ListProd());
@@ -44,5 +45,5 @@ namespace BakeryKK.Pages
         {
             NavigationService.Navigate(new Registration.Registration());
         }
-    }
+    }  
 }
